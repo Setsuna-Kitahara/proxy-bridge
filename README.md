@@ -33,7 +33,7 @@ Proxy Bridge is that helper. It is deliberately **not** HACS-only: it hooks
 ## Authors and how it was built
 
 **Proxy Bridge is AI-built software.** It was designed and implemented jointly
-by **Kitahara Setsuna** and the AI coding agent **DeepSeek Harness** (running
+by **Setsuna-Kitahara** and the AI coding agent **DeepSeek Harness** (running
 the `deepseek-flash` model). Architecture, the aiohttp patch, the dependency-free
 SOCKS5 client, the config flow, the translation pipeline and the test suite were
 written in that collaboration; the behaviour is pinned down by the automated
@@ -44,7 +44,7 @@ The AI involvement is disclosed on purpose: judge the project by its tests,
 its code and its issue tracker, not by who (or what) typed it. Bug reports and
 patches from humans and agents are equally welcome.
 
-Released under the [MIT license](LICENSE) — copyright 2026 Kitahara Setsuna and
+Released under the [MIT license](LICENSE) — copyright 2026 Setsuna-Kitahara and
 DeepSeek Harness.
 
 ## How it works
@@ -74,7 +74,7 @@ never sees or decrypts TLS content.
 ## Verifying your download
 
 Release archives are published together with `SHA256SUMS` on the
-[releases page](https://github.com/KitaharaSetsuna/proxy-bridge/releases) and
+[releases page](https://github.com/Setsuna-Kitahara/proxy-bridge/releases) and
 inside `dist/` in a checkout. If the file reached you through a mirror, a proxy
 cache or a chat app, verify it before copying anything into `/config`:
 
@@ -100,7 +100,7 @@ install them. The project does not ship code signatures yet, so these checksums
 ### From HACS (once GitHub is reachable)
 
 1. HACS → **Custom repositories** → add
-   `https://github.com/KitaharaSetsuna/proxy-bridge` as an *Integration*.
+   `https://github.com/Setsuna-Kitahara/proxy-bridge` as an *Integration*.
 2. Install **Proxy Bridge**, restart Home Assistant.
 3. **Settings → Devices & Services → Add Integration → Proxy Bridge**.
 4. Enter your proxy details, pick the hosts, run the test, save.
@@ -136,6 +136,14 @@ release-assets.githubusercontent.com  data-v2.hacs.xyz
 
 Because HACS pulls release archives from `codeload.github.com` but falls back
 to per-file downloads from `raw.githubusercontent.com`, both must be routed.
+
+> ⚠️ **Proxy credentials are stored unencrypted.** The username and password you
+> enter are kept by Home Assistant in the config entry (`.storage/core.config_entries`)
+> as plain text. Home Assistant does not encrypt integration secrets, and Proxy Bridge
+> does not add encryption of its own — so anyone who can read the Home Assistant
+> configuration directory, or a backup or snapshot of it, can read those credentials.
+> Prefer a dedicated proxy account, and do not reuse a password that matters elsewhere.
+> Diagnostics redact the password, but that only covers the diagnostics download.
 
 ### YAML (optional)
 
@@ -236,4 +244,4 @@ python scripts/build_dist.py
 
 ## License
 
-MIT © 2026 Kitahara Setsuna and DeepSeek Harness — see [LICENSE](LICENSE).
+MIT © 2026 Setsuna-Kitahara and DeepSeek Harness — see [LICENSE](LICENSE).

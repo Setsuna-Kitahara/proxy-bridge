@@ -26,7 +26,7 @@ Proxy Bridge 就是干这个的。它不是 HACS 专用插件：它只在进程�
 
 ## 作者与搭建方式
 
-**本插件由 AI 参与搭建，这一点明确写出、不做隐瞒。** 它由 **Kitahara Setsuna**
+**本插件由 AI 参与搭建，这一点明确写出、不做隐瞒。** 它由 **Setsuna-Kitahara**
 与 AI 编码代理 **DeepSeek Harness**（使用 `deepseek-flash` 模型）共同设计并实现：
 整体架构、aiohttp 补丁、零依赖 SOCKS5 客户端、配置向导、翻译流水线与测试套件，
 都出自这次人机协作。行为由 `tests/` 下的自动化测试固定，并在
@@ -36,7 +36,7 @@ Home Assistant 2025.1.4（`pytest-homeassistant-custom-component` 钉住的版�
 之所以公开声明，是因为“谁写的”不该成为评价标准——请按测试、代码和 issue
 记录来判断这个项目。人类和 AI Agent 提交的 bug 报告与补丁同样欢迎。
 
-以 [MIT 许可证](LICENSE) 发布，版权归 Kitahara Setsuna 与 DeepSeek Harness。
+以 [MIT 许可证](LICENSE) 发布，版权归 Setsuna-Kitahara 与 DeepSeek Harness。
 
 ## 工作原理
 
@@ -63,7 +63,7 @@ Proxy Bridge 看不到、也不解密任何 TLS 内容。
 ## 校验下载
 
 发布包会与 `SHA256SUMS` 一起挂在
-[releases 页面](https://github.com/KitaharaSetsuna/proxy-bridge/releases)，仓库
+[releases 页面](https://github.com/Setsuna-Kitahara/proxy-bridge/releases)，仓库
 `dist/` 里也会生成一份。如果你是通过网盘、镜像、代理缓存或聊天软件拿到文件的，
 先校验再往 `/config` 里拷：
 
@@ -88,7 +88,7 @@ Get-FileHash .\proxy_bridge_bootstrap-1.0.0.zip -Algorithm SHA256   # PowerShell
 ### 从 HACS 安装（GitHub 已可达时）
 
 1. HACS → **自定义仓库** → 添加
-   `https://github.com/KitaharaSetsuna/proxy-bridge`，类型选「集成」。
+   `https://github.com/Setsuna-Kitahara/proxy-bridge`，类型选「集成」。
 2. 安装 **Proxy Bridge**，重启 Home Assistant。
 3. **设置 → 设备与服务 → 添加集成 → Proxy Bridge**。
 4. 填写代理信息、勾选域名、点测试、保存。
@@ -123,6 +123,12 @@ release-assets.githubusercontent.com  data-v2.hacs.xyz
 
 HACS 优点在于优先取 release 压缩包（`codeload.github.com`），没有附件时
 才逐文件走 `raw.githubusercontent.com`，所以两个都必须分流。
+
+> ⚠️ **代理凭据未加密存储。** 你填写的用户名和密码由 Home Assistant 以明文保存在
+> 配置条目里（`.storage/core.config_entries`）。Home Assistant 本身不对集成密钥加密，
+> 本集成也没有自行加一层——因此，任何能读取 Home Assistant 配置目录、或其备份/快照的人，
+> 都能读到这些凭据。建议为代理单独开一个账号，不要复用别处重要的密码。
+> 诊断信息里密码会被打码，但那只覆盖诊断文件这一条路径。
 
 ### YAML（可选）
 
@@ -213,4 +219,4 @@ python scripts/build_dist.py
 
 ## 许可证
 
-MIT © 2026 Kitahara Setsuna 与 DeepSeek Harness，见 [LICENSE](LICENSE)。
+MIT © 2026 Setsuna-Kitahara 与 DeepSeek Harness，见 [LICENSE](LICENSE)。
