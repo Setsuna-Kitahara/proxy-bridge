@@ -1,0 +1,111 @@
+{
+  "config": {
+    "step": {
+      "connection": {
+        "title": "上游代理",
+        "description": "**自举版。** 这个集成的存在是为了在 HACS 能装上托管版之前先让你连上 GitHub。填写能访问外网的代理。用户名和密码是可选的，公开代理留空即可。**跳过证书校验**只对 `https://` 代理有效。编辑已有配置时，密码留空表示沿用已保存的密码。",
+        "data": {
+          "proxy_type": "协议",
+          "host": "主机",
+          "port": "端口",
+          "username": "用户名",
+          "password": "密码",
+          "insecure": "跳过 TLS 证书校验（仅 https 代理）"
+        },
+        "data_description": {
+          "proxy_type": "http 和 https 使用 CONNECT 隧道；socks5h 由代理解析域名；socks5 在本机解析域名。",
+          "host": "代理的主机名或 IP，不要带协议前缀和端口。",
+          "username": "只有需要认证的代理才需要填写。",
+          "password": "编辑已有配置时留空，表示沿用已保存的密码。"
+        }
+      },
+      "routes": {
+        "title": "要代理的域名",
+        "description": "**自举版。** 这个集成的存在是为了在 HACS 能装上托管版之前先让你连上 GitHub。选择需要走代理的域名，也可以输入额外规则，例如 `*.example.com`。默认值已覆盖 GitHub 和 HACS 所需的域名。",
+        "data": {
+          "name": "名称",
+          "hosts": "要代理的域名",
+          "retries": "GET/HEAD 重试次数",
+          "enabled": "启用这条规则",
+          "test_connection": "保存前测试连接"
+        },
+        "data_description": {
+          "name": "显示在集成列表里，同时用作唯一标识。",
+          "hosts": "精确域名或通配符。`*.example.com` 只匹配子域名。",
+          "retries": "GET/HEAD 请求失败后经代理重试的次数（0-10）。",
+          "test_connection": "如果代理当前不可达但仍想保存，请取消勾选。"
+        }
+      }
+    },
+    "error": {
+      "invalid_proxy_type": "不支持的代理协议。",
+      "invalid_host": "主机不能包含协议前缀、路径或空格。",
+      "invalid_port": "端口必须在 1 到 65535 之间。",
+      "password_without_username": "填写密码时必须同时填写用户名。",
+      "cannot_connect": "无法通过该代理访问要代理的域名。详情：{error}",
+      "unknown": "发生未知错误。"
+    },
+    "abort": {
+      "already_configured": "同名的代理规则已存在。",
+      "reconfigure_successful": "代理规则已更新。",
+      "unique_id_mismatch": "该规则已用另一个名称配置过。"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "代理桥",
+        "description": "修改上游代理。"
+      },
+      "connection": {
+        "title": "上游代理",
+        "description": "填写能访问外网的代理。用户名和密码是可选的，公开代理留空即可。",
+        "data": {
+          "proxy_type": "协议",
+          "host": "主机",
+          "port": "端口",
+          "username": "用户名",
+          "password": "密码",
+          "insecure": "跳过 TLS 证书校验（仅 https 代理）"
+        },
+        "data_description": {
+          "proxy_type": "http 和 https 使用 CONNECT 隧道；socks5h 由代理解析域名；socks5 在本机解析域名。",
+          "host": "代理的主机名或 IP，不要带协议前缀和端口。"
+        }
+      },
+      "routes": {
+        "title": "要代理的域名",
+        "description": "选择需要走代理的域名，也可以输入额外规则，例如 `*.example.com`。",
+        "data": {
+          "name": "名称",
+          "hosts": "要代理的域名",
+          "retries": "GET/HEAD 重试次数",
+          "enabled": "启用这条规则",
+          "test_connection": "保存前测试连接"
+        },
+        "data_description": {
+          "hosts": "精确域名或通配符。`*.example.com` 只匹配子域名。",
+          "test_connection": "如果代理当前不可达但仍想保存，请取消勾选。"
+        }
+      }
+    },
+    "error": {
+      "invalid_proxy_type": "不支持的代理协议。",
+      "invalid_host": "主机不能包含协议前缀、路径或空格。",
+      "invalid_port": "端口必须在 1 到 65535 之间。",
+      "password_without_username": "填写密码时必须同时填写用户名。",
+      "cannot_connect": "无法通过该代理访问要代理的域名。详情：{error}",
+      "unknown": "发生未知错误。"
+    }
+  },
+  "selector": {
+    "proxy_type": {
+      "options": {
+        "http": "HTTP 代理",
+        "https": "HTTPS 代理",
+        "socks5": "SOCKS5 代理（本机解析域名）",
+        "socks5h": "SOCKS5 代理（代理端解析域名）"
+      }
+    }
+  }
+}

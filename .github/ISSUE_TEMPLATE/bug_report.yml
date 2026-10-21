@@ -1,0 +1,66 @@
+name: Bug report
+description: Something does not work as documented
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. Please include logs with debug logging enabled:
+
+        ```yaml
+        logger:
+          logs:
+            custom_components.proxy_bridge: debug
+        ```
+  - type: input
+    id: ha_version
+    attributes:
+      label: Home Assistant version
+      placeholder: "2026.10.2"
+    validations:
+      required: true
+  - type: input
+    id: integration_version
+    attributes:
+      label: Proxy Bridge version
+      placeholder: "1.0.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: How did you install it?
+      options:
+        - HACS (managed copy)
+        - Release zip (managed copy)
+        - Bootstrap zip (proxy_bridge_bootstrap)
+    validations:
+      required: true
+  - type: dropdown
+    id: proxy_type
+    attributes:
+      label: Upstream proxy type
+      options: [http, https, socks5, socks5h, not sure]
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happens?
+      description: Include the failing URL host, the error text, and whether the Test connection switch passed.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log lines
+      render: text
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I am not running another aiohttp proxy patch (for example hacs-proxy) at the same time.
+          required: true
+        - label: I removed credentials from anything I pasted here.
+          required: true

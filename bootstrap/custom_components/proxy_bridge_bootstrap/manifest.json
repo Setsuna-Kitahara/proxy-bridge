@@ -1,0 +1,12 @@
+{
+  "domain": "proxy_bridge_bootstrap",
+  "name": "Proxy Bridge (Bootstrap)",
+  "codeowners": ["@KitaharaSetsuna"],
+  "config_flow": true,
+  "documentation": "https://github.com/KitaharaSetsuna/proxy-bridge/blob/main/docs/BOOTSTRAP.md",
+  "integration_type": "service",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/KitaharaSetsuna/proxy-bridge/issues",
+  "requirements": [],
+  "version": "1.0.0"
+}

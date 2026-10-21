@@ -1,0 +1,27 @@
+name: Translation
+description: Add or fix a language
+labels: [translation]
+body:
+  - type: input
+    id: language
+    attributes:
+      label: Language
+      description: BCP-47 tag, e.g. de, fr, pt-BR, zh-Hant
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of change?
+      options:
+        - New language
+        - Fix an existing translation
+        - Complete a needs-translation file
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        Follow [docs/TRANSLATING.md](../blob/main/docs/TRANSLATING.md).
+        An AI agent can do this end to end: scaffold, translate values only,
+        then run `python scripts/i18n.py check` and `python scripts/validate.py`.

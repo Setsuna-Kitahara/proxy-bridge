@@ -1,0 +1,7 @@
+aiohttp>=3.9
+cryptography>=42
+pytest>=8
+pytest-asyncio>=0.23
+pytest-timeout>=2
+pytest-homeassistant-custom-component>=0.13.205
+voluptuous>=0.13

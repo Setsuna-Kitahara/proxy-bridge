@@ -1,0 +1,142 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Set up Proxy Bridge",
+        "description": "An existing bootstrap installation was found. Import its settings, or configure a new proxy route from scratch.",
+        "menu_options": {
+          "bootstrap_import": "Import settings from the bootstrap copy",
+          "manual": "Configure a new proxy route"
+        }
+      },
+      "connection": {
+        "title": "Upstream proxy",
+        "description": "Enter the proxy that can reach the internet. Username and password are optional; leave them empty for open proxies. When editing an existing route, leave the password empty to keep the saved one. The **Verify certificate** option only applies to `https://` proxies.",
+        "data": {
+          "proxy_type": "Protocol",
+          "host": "Host",
+          "port": "Port",
+          "username": "Username",
+          "password": "Password",
+          "insecure": "Skip TLS certificate verification (https proxies only)"
+        },
+        "data_description": {
+          "proxy_type": "http and https use a CONNECT tunnel; socks5h lets the proxy resolve host names; socks5 resolves them locally.",
+          "host": "Host name or IP address of the proxy, without a scheme or port.",
+          "username": "Only for proxies that require authentication.",
+          "password": "Leave empty to keep the saved password when editing an existing route."
+        }
+      },
+      "routes": {
+        "title": "Routed hosts",
+        "description": "Pick the host names whose traffic should go through the proxy, or type extra patterns such as `*.example.com`. The defaults cover GitHub and HACS.",
+        "data": {
+          "name": "Name",
+          "hosts": "Hosts to route",
+          "retries": "Retries for GET/HEAD requests",
+          "enabled": "Enable this route",
+          "test_connection": "Test the connection before saving"
+        },
+        "data_description": {
+          "name": "Shown in the integration list; also used as the unique id.",
+          "hosts": "Exact host names or wildcard patterns. `*.example.com` matches sub-domains only.",
+          "retries": "How many times a failed GET/HEAD request is retried through the proxy (0-10).",
+          "test_connection": "Uncheck to save even when the proxy cannot be reached right now."
+        }
+      }
+    },
+    "error": {
+      "invalid_proxy_type": "Unsupported proxy protocol.",
+      "invalid_host": "The host must not contain a scheme, a path or spaces.",
+      "invalid_port": "The port must be between 1 and 65535.",
+      "password_without_username": "A password needs a username.",
+      "cannot_connect": "Could not reach the routed hosts through this proxy. Details: {error}",
+      "unknown": "Unexpected error."
+    },
+    "abort": {
+      "already_configured": "A proxy route with this name already exists.",
+      "import_failed": "The YAML configuration could not be imported. Check the Home Assistant log for details.",
+      "reconfigure_successful": "Proxy route updated.",
+      "unique_id_mismatch": "This route is already configured under a different name."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Proxy Bridge",
+        "description": "Edit the upstream proxy."
+      },
+      "connection": {
+        "title": "Upstream proxy",
+        "description": "Enter the proxy that can reach the internet. Username and password are optional; leave them empty for open proxies.",
+        "data": {
+          "proxy_type": "Protocol",
+          "host": "Host",
+          "port": "Port",
+          "username": "Username",
+          "password": "Password",
+          "insecure": "Skip TLS certificate verification (https proxies only)"
+        },
+        "data_description": {
+          "proxy_type": "http and https use a CONNECT tunnel; socks5h lets the proxy resolve host names; socks5 resolves them locally.",
+          "host": "Host name or IP address of the proxy, without a scheme or port."
+        }
+      },
+      "routes": {
+        "title": "Routed hosts",
+        "description": "Pick the host names whose traffic should go through the proxy, or type extra patterns such as `*.example.com`.",
+        "data": {
+          "name": "Name",
+          "hosts": "Hosts to route",
+          "retries": "Retries for GET/HEAD requests",
+          "enabled": "Enable this route",
+          "test_connection": "Test the connection before saving"
+        },
+        "data_description": {
+          "hosts": "Exact host names or wildcard patterns. `*.example.com` matches sub-domains only.",
+          "test_connection": "Uncheck to save even when the proxy cannot be reached right now."
+        }
+      }
+    },
+    "error": {
+      "invalid_proxy_type": "Unsupported proxy protocol.",
+      "invalid_host": "The host must not contain a scheme, a path or spaces.",
+      "invalid_port": "The port must be between 1 and 65535.",
+      "password_without_username": "A password needs a username.",
+      "cannot_connect": "Could not reach the routed hosts through this proxy. Details: {error}",
+      "unknown": "Unexpected error."
+    }
+  },
+  "selector": {
+    "proxy_type": {
+      "options": {
+        "http": "HTTP proxy",
+        "https": "HTTPS proxy",
+        "socks5": "SOCKS5 proxy (resolve locally)",
+        "socks5h": "SOCKS5 proxy (resolve remotely)"
+      }
+    }
+  },
+  "issues": {
+    "bootstrap_detected": {
+      "title": "Proxy Bridge: bootstrap copy still installed",
+      "description": "The bootstrap copy of Proxy Bridge is installed ({count} entry/entries). The managed copy is now handling the routing, so the bootstrap integration is redundant.\n\nRemove `custom_components/proxy_bridge_bootstrap` from your configuration directory, delete its entry under Settings > Devices & services, then restart Home Assistant. Keeping both installed is harmless but routes traffic twice."
+    }
+  },
+  "services": {
+    "probe": {
+      "name": "Test proxy",
+      "description": "Open a temporary tunnel through a proxy and fetch one of the given hosts.",
+      "fields": {
+        "proxy": {
+          "name": "Proxy",
+          "description": "Proxy URL, for example `http://user:pass@192.168.1.10:7890` or `socks5h://192.168.1.10:1080`."
+        },
+        "hosts": {
+          "name": "Hosts",
+          "description": "Host names to test; the first reachable one is used."
+        }
+      }
+    }
+  }
+}

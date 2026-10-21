@@ -1,0 +1,24 @@
+probe:
+  name: Test proxy
+  description: >-
+    Open a temporary tunnel through a proxy and fetch one of the given hosts,
+    without changing the running configuration. Returns one result per host.
+  fields:
+    proxy:
+      name: Proxy
+      description: >-
+        Proxy URL, for example `http://user:pass@192.168.1.10:7890` or
+        `socks5h://192.168.1.10:1080`.
+      required: true
+      example: "socks5h://192.168.1.10:1080"
+      selector:
+        text:
+    hosts:
+      name: Hosts
+      description: >-
+        Hosts to reach through the proxy. Defaults to the built-in list of
+        GitHub, raw.githubusercontent.com and codeload.github.com.
+      required: false
+      example: "github.com"
+      selector:
+        object:
