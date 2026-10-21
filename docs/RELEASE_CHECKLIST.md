@@ -3,11 +3,11 @@
 ## 1. Confirm repository metadata
 
 The manifests, READMEs, docs and `i18n/languages.json` already point at
-`KitaharaSetsuna/proxy-bridge`. If you fork the project or move it to another
+`Setsuna-Kitahara/proxy-bridge`. If you fork the project or move it to another
 owner, update them and grep for leftovers first:
 
 ```bash
-grep -rn "KitaharaSetsuna" --exclude-dir=.git .
+grep -rn "Setsuna-Kitahara" --exclude-dir=.git .
 ```
 
 ## 2. Bump the version

@@ -47,8 +47,8 @@ Pick whichever route you have:
 
 ```bash
 cd /config
-curl -L -o /tmp/bootstrap.zip https://github.com/KitaharaSetsuna/proxy-bridge/releases/latest/download/proxy_bridge_bootstrap-1.0.0.zip
-curl -L -o /tmp/SHA256SUMS https://github.com/KitaharaSetsuna/proxy-bridge/releases/latest/download/SHA256SUMS
+curl -L -o /tmp/bootstrap.zip https://github.com/Setsuna-Kitahara/proxy-bridge/releases/latest/download/proxy_bridge_bootstrap-1.0.0.zip
+curl -L -o /tmp/SHA256SUMS https://github.com/Setsuna-Kitahara/proxy-bridge/releases/latest/download/SHA256SUMS
 sha256sum -c SHA256SUMS   # run from /tmp; must print OK
 unzip -o /tmp/bootstrap.zip -d /config
 ```
@@ -75,7 +75,7 @@ Save. HACS should now be able to download.
 
 1. Install the managed copy the normal way:
    - HACS → *Custom repositories* → add
-     `https://github.com/KitaharaSetsuna/proxy-bridge` (category
+     `https://github.com/Setsuna-Kitahara/proxy-bridge` (category
      *Integration*), then install **Proxy Bridge**; **or**
    - unzip `proxy_bridge-<version>.zip` into `/config` (it puts
      `custom_components/proxy_bridge/` in place).

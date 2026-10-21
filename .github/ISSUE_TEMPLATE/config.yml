@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
   - name: Setup and bootstrap questions
-    url: https://github.com/KitaharaSetsuna/proxy-bridge/blob/main/docs/BOOTSTRAP.md
+    url: https://github.com/Setsuna-Kitahara/proxy-bridge/blob/main/docs/BOOTSTRAP.md
     about: Read this first if GitHub is unreachable and you cannot install via HACS.

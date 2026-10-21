@@ -1,12 +1,12 @@
 {
   "domain": "proxy_bridge",
   "name": "Proxy Bridge",
-  "codeowners": ["@KitaharaSetsuna"],
+  "codeowners": ["@Setsuna-Kitahara"],
   "config_flow": true,
-  "documentation": "https://github.com/KitaharaSetsuna/proxy-bridge",
+  "documentation": "https://github.com/Setsuna-Kitahara/proxy-bridge",
   "integration_type": "service",
   "iot_class": "local_polling",
-  "issue_tracker": "https://github.com/KitaharaSetsuna/proxy-bridge/issues",
+  "issue_tracker": "https://github.com/Setsuna-Kitahara/proxy-bridge/issues",
   "requirements": [],
   "version": "1.0.0"
 }
