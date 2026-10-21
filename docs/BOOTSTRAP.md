@@ -47,7 +47,7 @@ Pick whichever route you have:
 
 ```bash
 cd /config
-curl -L -o /tmp/bootstrap.zip https://github.com/Setsuna-Kitahara/proxy-bridge/releases/latest/download/proxy_bridge_bootstrap-1.0.0.zip
+curl -L -o /tmp/bootstrap.zip https://github.com/Setsuna-Kitahara/proxy-bridge/releases/latest/download/proxy_bridge_bootstrap-1.0.1.zip
 curl -L -o /tmp/SHA256SUMS https://github.com/Setsuna-Kitahara/proxy-bridge/releases/latest/download/SHA256SUMS
 sha256sum -c SHA256SUMS   # run from /tmp; must print OK
 unzip -o /tmp/bootstrap.zip -d /config

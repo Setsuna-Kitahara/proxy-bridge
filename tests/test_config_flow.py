@@ -27,6 +27,7 @@ from custom_components.proxy_bridge.proxy_core import (
     CONF_RETRIES,
     CONF_TEST_CONNECTION,
     CONF_USERNAME,
+    ProxySpec,
     registered_routes,
     unpatch,
 )
@@ -337,3 +338,42 @@ async def test_options_flow_drops_password_when_username_changes(
     assert result["type"] == "create_entry"
     await hass.async_block_till_done()
     assert not managed_entry.options.get(CONF_PASSWORD)
+
+
+async def test_probe_service_accepts_proxy_string(
+    hass: HomeAssistant,
+    managed_entry: MockConfigEntry,
+    enable_custom_integrations,
+    socket_enabled,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """``proxy_bridge.probe`` maps option keys onto ProxySpec fields."""
+    import custom_components.proxy_bridge as proxy_bridge
+
+    seen: dict[str, object] = {}
+
+    async def fake_probe(spec, hosts):
+        seen["spec"] = spec
+        seen["hosts"] = tuple(hosts)
+        return None
+
+    monkeypatch.setattr(proxy_bridge, "async_probe", fake_probe)
+
+    assert await hass.config_entries.async_setup(managed_entry.entry_id)
+    await hass.async_block_till_done()
+
+    response = await hass.services.async_call(
+        DOMAIN,
+        "probe",
+        {"proxy": "socks5://user:secret@10.0.0.9:1080", "hosts": ["example.com"]},
+        blocking=True,
+        return_response=True,
+    )
+
+    assert response["ok"] is True
+    assert response["hosts"] == ["example.com"]
+    spec = seen["spec"]
+    assert isinstance(spec, ProxySpec)
+    assert (spec.type, spec.host, spec.port) == ("socks5", "10.0.0.9", 1080)
+    assert (spec.username, spec.password) == ("user", "secret")
+    assert seen["hosts"] == ("example.com",)

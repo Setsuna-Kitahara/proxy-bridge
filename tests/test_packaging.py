@@ -33,7 +33,7 @@ def test_manifest_matches_directory(component: Path) -> None:
     manifest = json.loads(_read(component / "manifest.json"))
     assert manifest["domain"] == component.name
     assert manifest["config_flow"] is True
-    assert manifest["version"] == "1.0.0"
+    assert manifest["version"] == "1.0.1"
 
 
 def test_both_components_share_a_version() -> None:
@@ -66,8 +66,8 @@ def test_readme_checksum_table_is_regenerated(tmp_path: Path) -> None:
         encoding="utf-8",
     )
     lines = [
-        f"{'a' * 64}  proxy_bridge-1.0.0.zip",
-        f"{'b' * 64}  proxy_bridge_bootstrap-1.0.0.zip",
+        f"{'a' * 64}  proxy_bridge-1.0.1.zip",
+        f"{'b' * 64}  proxy_bridge_bootstrap-1.0.1.zip",
     ]
     assert build_dist.update_readme(readme, lines) is True
     text = readme.read_text(encoding="utf-8")
@@ -87,7 +87,7 @@ def test_validate_reports_a_stale_checksum_table(
     dist = tmp_path / "dist"
     dist.mkdir()
     (dist / "SHA256SUMS").write_text(
-        f"{'c' * 64}  proxy_bridge-1.0.0.zip\n", encoding="utf-8"
+        f"{'c' * 64}  proxy_bridge-1.0.1.zip\n", encoding="utf-8"
     )
     for name in ("README.md", "README.zh-Hans.md"):
         (tmp_path / name).write_text(

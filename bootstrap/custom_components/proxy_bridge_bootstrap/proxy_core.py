@@ -270,6 +270,25 @@ def parse_proxy_string(value: str) -> dict[str, Any]:
     return result
 
 
+def proxy_spec_from_options(raw: Mapping[str, Any]) -> ProxySpec:
+    """Build a :class:`ProxySpec` from option-keyed values.
+
+    :func:`parse_proxy_string` returns the option keys used by config entries
+    (``proxy_type``, ``host``, ``port``, ...), not the dataclass field names, so
+    every caller that has option-style data goes through this helper.
+    """
+    username = str(raw.get(CONF_USERNAME) or "").strip() or None
+    password = str(raw.get(CONF_PASSWORD) or "") or None
+    return ProxySpec(
+        type=str(raw.get(CONF_PROXY_TYPE) or DEFAULT_PROXY_TYPE),
+        host=str(raw.get(CONF_HOST) or DEFAULT_HOST),
+        port=int(raw.get(CONF_PORT) or DEFAULT_PORT),
+        username=username,
+        password=password,
+        insecure=bool(raw.get(CONF_INSECURE)),
+    )
+
+
 @dataclass(frozen=True, slots=True)
 class BridgeConfig:
     """Everything one bridge instance needs."""
@@ -358,14 +377,7 @@ def build_bridge_config(
     clean, errors = clean_options(raw)
     if errors:
         return None, errors
-    spec = ProxySpec(
-        type=clean[CONF_PROXY_TYPE],
-        host=clean[CONF_HOST],
-        port=int(clean[CONF_PORT]),
-        username=clean[CONF_USERNAME],
-        password=clean[CONF_PASSWORD],
-        insecure=clean[CONF_INSECURE],
-    )
+    spec = proxy_spec_from_options(clean)
     return (
         BridgeConfig(
             name=clean[CONF_NAME],

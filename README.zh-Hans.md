@@ -69,15 +69,15 @@ Proxy Bridge 看不到、也不解密任何 TLS 内容。
 
 ```bash
 sha256sum -c SHA256SUMS                              # Linux
-shasum -a 256 proxy_bridge_bootstrap-1.0.0.zip       # macOS
-Get-FileHash .\proxy_bridge_bootstrap-1.0.0.zip -Algorithm SHA256   # PowerShell
+shasum -a 256 proxy_bridge_bootstrap-1.0.1.zip       # macOS
+Get-FileHash .\proxy_bridge_bootstrap-1.0.1.zip -Algorithm SHA256   # PowerShell
 ```
 
 <!-- sha256:begin -->
 | 安装包 | SHA-256 |
 | --- | --- |
-| `proxy_bridge-1.0.0.zip` | `00764afe0ccc6c70f8a67340d83f025f515f45ebb813c4da36b0a6e4bd759270` |
-| `proxy_bridge_bootstrap-1.0.0.zip` | `00e6dd47ba8958f2fe9e648edff777ca2957ce2781475f0c36b614770c31bc1b` |
+| `proxy_bridge-1.0.1.zip` | `afdc174ab1f1a89920338b14250e8a8ce3498faa8900c16d43a655f52b9b3826` |
+| `proxy_bridge_bootstrap-1.0.1.zip` | `78fc460e802023874d85007f6d142c6b09975b20ab3fb311c97c8c4c3eeebc17` |
 <!-- sha256:end -->
 
 对不上就说明字节不是这个仓库构建出来的，**不要安装**。项目暂未提供代码签名，

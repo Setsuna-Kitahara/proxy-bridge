@@ -501,3 +501,17 @@ def test_redacted_never_leaks_password() -> None:
     assert "topsecret" not in spec.redacted()
     assert "alice" in spec.redacted()
     assert "topsecret" not in str(spec.as_dict())
+
+
+def test_parse_proxy_string_feeds_proxy_spec() -> None:
+    """Option-keyed output of parse_proxy_string builds a ProxySpec."""
+    parsed = core.parse_proxy_string("socks5h://user:secret@10.0.0.5:1080")
+    spec = core.proxy_spec_from_options(parsed)
+    assert spec == core.ProxySpec(
+        type="socks5h",
+        host="10.0.0.5",
+        port=1080,
+        username="user",
+        password="secret",
+    )
+    assert core.proxy_spec_from_options({"proxy_type": "http"}) == core.ProxySpec()

@@ -8,7 +8,7 @@ from homeassistant.config_entries import ConfigEntry
 
 DOMAIN = "proxy_bridge_bootstrap"
 NAME = "Proxy Bridge (Bootstrap)"
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 
 #: Integration that takes over once HACS works and can install it.
 MANAGED_DOMAIN = "proxy_bridge"

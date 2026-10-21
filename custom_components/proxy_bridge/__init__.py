@@ -48,10 +48,10 @@ from .const import (
 from .proxy_core import (
     ProxyError,
     ProxyRuntime,
-    ProxySpec,
     async_probe,
     build_bridge_config,
     parse_proxy_string,
+    proxy_spec_from_options,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -201,7 +201,7 @@ def _async_register_services(hass: HomeAssistant) -> None:
 
     async def _async_probe_service(call: ServiceCall) -> dict[str, Any]:
         try:
-            spec = ProxySpec(**parse_proxy_string(call.data["proxy"]))
+            spec = proxy_spec_from_options(parse_proxy_string(call.data["proxy"]))
         except ValueError as err:
             return {"ok": False, "error": str(err), "hosts": []}
         hosts = [host for host in call.data[CONF_HOSTS] if isinstance(host, str)]

@@ -43,11 +43,11 @@ the SHA-256 of both archives and the install instructions. Attach the archives
 and `SHA256SUMS` to the GitHub release and use the notes file as the body:
 
 ```bash
-gh release create v1.0.0 \
-  dist/proxy_bridge-1.0.0.zip \
-  dist/proxy_bridge_bootstrap-1.0.0.zip \
+gh release create v1.0.1 \
+  dist/proxy_bridge-1.0.1.zip \
+  dist/proxy_bridge_bootstrap-1.0.1.zip \
   dist/SHA256SUMS \
-  --title "Proxy Bridge 1.0.0" \
+  --title "Proxy Bridge 1.0.1" \
   --notes-file dist/RELEASE_NOTES.md
 ```
 
@@ -67,10 +67,10 @@ longer matches `dist/SHA256SUMS`.
 ## 5. Publish
 
 ```bash
-git tag v1.0.0
+git tag v1.0.1
 git push origin main --tags
-gh release create v1.0.0 dist/*.zip dist/SHA256SUMS \
-  --title "Proxy Bridge 1.0.0" --notes-file release-notes.md
+gh release create v1.0.1 dist/*.zip dist/SHA256SUMS \
+  --title "Proxy Bridge 1.0.1" --notes-file release-notes.md
 ```
 
 Release notes must mention: new proxy types, credential support, the two

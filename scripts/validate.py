@@ -235,6 +235,20 @@ def check_readme_checksums(problems: list[str]) -> None:
                 )
 
 
+def check_changelog(problems: list[str]) -> None:
+    """Require a CHANGELOG entry for the version being released."""
+    path = ROOT / "CHANGELOG.md"
+    if not path.exists():
+        return
+    version = json.loads((MANAGED / "manifest.json").read_text(encoding="utf-8"))[
+        "version"
+    ]
+    heading = f"## {version}"
+    lines = path.read_text(encoding="utf-8").splitlines()
+    if not any(line.startswith(heading) for line in lines):
+        problems.append(f"CHANGELOG.md has no {heading!r} section")
+
+
 def main(argv: list[str]) -> int:
     """Run every check and report the result."""
     parser = argparse.ArgumentParser(description=__doc__)
@@ -253,6 +267,7 @@ def main(argv: list[str]) -> int:
     check_python(problems)
     check_json(problems)
     check_readme_checksums(problems)
+    check_changelog(problems)
 
     if problems:
         print("validation failed:\n  " + "\n  ".join(problems))

@@ -35,7 +35,7 @@ from .proxy_core import (
 
 DOMAIN = "proxy_bridge"
 NAME = "Proxy Bridge"
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 
 # Integration that users install first when they cannot reach GitHub at all.
 BOOTSTRAP_DOMAIN = "proxy_bridge_bootstrap"

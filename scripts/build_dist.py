@@ -33,9 +33,12 @@ FIXED_TIME = (2020, 1, 1, 0, 0, 0)
 SHA_BEGIN = "<!-- sha256:begin -->"
 SHA_END = "<!-- sha256:end -->"
 README_FILES = ("README.md", "README.zh-Hans.md")
+CHANGELOG = ROOT / "CHANGELOG.md"
 
 RELEASE_NOTES = """\
 # Proxy Bridge {version}
+
+{changes}## Overview
 
 Route selected hosts through an HTTP/HTTPS/SOCKS5 proxy from inside Home
 Assistant. Two archives, same code base:
@@ -136,6 +139,27 @@ def write_zip(
             archive.writestr(info, payload)
 
 
+def release_changes(version: str) -> str:
+    """Return the CHANGELOG section for ``version`` formatted for the notes."""
+    if not CHANGELOG.exists():
+        return ""
+    lines = CHANGELOG.read_text(encoding="utf-8").splitlines()
+    heading = f"## {version}"
+    collected: list[str] = []
+    for index, line in enumerate(lines):
+        if line.startswith(heading) and line[len(heading) : len(heading) + 1] in (
+            "",
+            " ",
+        ):
+            for body in lines[index + 1 :]:
+                if body.startswith("## "):
+                    break
+                collected.append(body)
+            break
+    text = "\n".join(collected).strip()
+    return f"## Changes\n\n{text}\n\n" if text else ""
+
+
 def main(argv: list[str]) -> int:
     """Build the archives."""
     parser = argparse.ArgumentParser(description=__doc__)
@@ -181,7 +205,10 @@ def main(argv: list[str]) -> int:
     print(f"wrote {DIST.relative_to(ROOT)}/SHA256SUMS")
 
     (DIST / "RELEASE_NOTES.md").write_text(
-        RELEASE_NOTES.format(version=current, sums=sums), encoding="utf-8"
+        RELEASE_NOTES.format(
+            version=current, sums=sums, changes=release_changes(current)
+        ),
+        encoding="utf-8",
     )
     print(f"wrote {DIST.relative_to(ROOT)}/RELEASE_NOTES.md")
 
