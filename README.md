@@ -87,8 +87,8 @@ Get-FileHash .\proxy_bridge_bootstrap-1.0.0.zip -Algorithm SHA256   # PowerShell
 <!-- sha256:begin -->
 | Archive | SHA-256 |
 | --- | --- |
-| `proxy_bridge-1.0.0.zip` | `fc95cc46b6023342e03f3345184f5ccc15e96053ff6021853a19faae73e49b7a` |
-| `proxy_bridge_bootstrap-1.0.0.zip` | `ed005d613ba46fafe9ef7b7e9aaa24d88a6f40dd1d55864732b0c00f59b6a85c` |
+| `proxy_bridge-1.0.0.zip` | `00764afe0ccc6c70f8a67340d83f025f515f45ebb813c4da36b0a6e4bd759270` |
+| `proxy_bridge_bootstrap-1.0.0.zip` | `00e6dd47ba8958f2fe9e648edff777ca2957ce2781475f0c36b614770c31bc1b` |
 <!-- sha256:end -->
 
 A mismatch means the bytes are not the ones built from this repository: do not
